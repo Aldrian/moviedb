@@ -1,9 +1,9 @@
-import { Movie } from "./types";
+import { MovieListElem } from "./types";
 
 const movieApiBaseUrl = "https://api.themoviedb.org/3";
 const posterBaseUrl = "https://image.tmdb.org/t/p/w300";
 
-export const getPopularMovies = async (): Promise<Movie[]> => {
+export const getPopularMovies = async (): Promise<MovieListElem[]> => {
   try {
     const response = await fetch(
       `${movieApiBaseUrl}/movie/popular?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}`
@@ -27,7 +27,7 @@ export const getPopularMovies = async (): Promise<Movie[]> => {
   }
 };
 
-export const searchMovies = async (query: string): Promise<Movie[]> => {
+export const searchMovies = async (query: string): Promise<MovieListElem[]> => {
   try {
     const response = await fetch(
       `${movieApiBaseUrl}/search/movie?api_key=${

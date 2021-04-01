@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactElement } from "react";
 import styled from "@emotion/styled";
 import { getPopularMovies, searchMovies } from "../model/movies/movies";
-import { Movie } from "../model/movies/types";
+import { MovieListElem } from "../model/movies/types";
 import { Poster } from "../components/Poster";
 import { SearchBar } from "../components/SearchBar";
 import { PosterSkeleton } from "../components/PosterSkeleton";
@@ -25,7 +25,7 @@ const duplicate = (x: ReactElement, n: number) =>
   Array.from(new Array(n), () => x);
 
 const Home = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<MovieListElem[]>([]);
   const [loading, setLoading] = useState(true);
   const skeletonElems = duplicate(<PosterSkeleton />, 8);
 

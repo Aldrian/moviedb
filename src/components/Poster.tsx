@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Movie } from "../model/movies/types";
+import { MovieListElem } from "../model/movies/types";
 
 const Overlay = styled.span`
   position: absolute;
@@ -57,7 +57,7 @@ const PosterElem = styled.div`
 `;
 
 type PosterProps = {
-  movie: Movie;
+  movie: MovieListElem;
 };
 
 export const Poster = ({ movie }: PosterProps) => (
