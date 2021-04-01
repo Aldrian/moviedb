@@ -5,11 +5,13 @@ import { LightDarkToggleSwitch } from "./LightDarkToggleSwitch";
 const NavbarElem = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 
   background-color: ${(props) => props.theme.colors.header};
   color: ${(props) => props.theme.colors.text};
+
+  width: 100%;
 
   transition: color 0.3s ease, background-color 0.3s ease;
 
