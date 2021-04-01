@@ -4,6 +4,7 @@ import { ThemeProvider } from "@emotion/react";
 import { lightTheme, darkTheme } from "./utils/themes";
 import Home from "./pages/Home";
 import { Navbar } from "./components/Navbar";
+import { Container } from "./components/Container";
 
 const App = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(
@@ -19,13 +20,15 @@ const App = () => {
         isDarkTheme={isDarkTheme}
         setIsDarkTheme={setIsDarkTheme}
       />
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+      <Container>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </Container>
     </ThemeProvider>
   );
 };
