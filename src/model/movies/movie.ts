@@ -11,7 +11,7 @@ export const getMovieDetails = async (
       `${movieApiBaseUrl}/movie/${movieId}?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}`
     );
     const data = await response.json();
-    console.log(data);
+    if (!data.id) return null;
     return {
       id: data.id,
       title: data.title,

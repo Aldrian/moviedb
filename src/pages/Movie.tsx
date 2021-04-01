@@ -6,6 +6,41 @@ import { MovieDetailsElem } from "../model/movies/types";
 import { getMovieDetails } from "../model/movies/movie";
 import { PosterSkeleton } from "../components/PosterSkeleton";
 
+const TitleSkeleton = styled.h2`
+  display: block;
+  position: relative;
+
+  width: 250px;
+  height: 27px;
+  background-color: ${(props) => props.theme.colors.backgroundLight};
+
+  transition: background-color 0.3s ease;
+`;
+
+const DescriptionSkeleton = styled.p`
+  display: block;
+  position: relative;
+  margin-top: 2px;
+  margin-bottom: 2px;
+
+  width: 450px;
+  height: 18px;
+  background-color: ${(props) => props.theme.colors.backgroundLight};
+
+  transition: background-color 0.3s ease;
+`;
+
+const RatingSkeleton = styled.p`
+  display: block;
+  position: relative;
+
+  width: 100px;
+  height: 18px;
+  background-color: ${(props) => props.theme.colors.backgroundLight};
+
+  transition: background-color 0.3s ease;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -47,28 +82,40 @@ const Movie = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getMovieDetails(id).then((elem) => {
-      setMovieData(elem);
-      setLoading(false);
-    });
+    getMovieDetails(id)
+      .then((elem) => {
+        setMovieData(elem);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [id]);
 
   if (!loading && !movieData) {
     return (
       <Wrapper>
-        <p>No results</p>
+        <Content>
+          <p>No results</p>
+        </Content>
       </Wrapper>
     );
   }
 
+  console.log(setMovieData);
+
   return (
     <Wrapper>
       <Content>
-        {loading && <span />}
+        {loading && <TitleSkeleton />}
         {!loading && movieData?.title && <h2>{movieData.title}</h2>}
-        {loading && <span />}
+        {loading && (
+          <div>
+            <DescriptionSkeleton />
+            <DescriptionSkeleton />
+            <DescriptionSkeleton />
+          </div>
+        )}
         {!loading && movieData?.description && <p>{movieData.description}</p>}
-        {loading && <span />}
+        {loading && <RatingSkeleton />}
         {!loading && movieData?.rating && <p>{movieData.rating} / 10</p>}
       </Content>
       {loading && <PosterSkeleton />}
