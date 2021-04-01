@@ -3,8 +3,13 @@ import styled from "@emotion/styled";
 import { getPopularMovies } from "../model/movies/movies";
 import { Movie } from "../model/movies/types";
 import { Poster } from "../components/Poster";
+import { SearchBar } from "../components/SearchBar";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const PosterList = styled.div`
   display: flex;
@@ -26,6 +31,11 @@ const Home = () => {
 
   return (
     <Wrapper>
+      <SearchBar
+        onActionCalled={(searchValue: string) => {
+          console.log(searchValue);
+        }}
+      />
       <PosterList>
         {popularMovies.map((movie) => (
           <Poster movie={movie} key={`movie${movie.id}`} />

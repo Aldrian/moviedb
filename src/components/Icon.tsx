@@ -4,7 +4,7 @@ const IconElem = styled.span`
   font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px; /* Preferred icon size */
+  font-size: 24px;
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -13,20 +13,27 @@ const IconElem = styled.span`
   white-space: nowrap;
   direction: ltr;
 
-  /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
   font-feature-settings: "liga";
 `;
 
 type IconProps = {
   name: string;
+  className?: string;
+  onClick?: Function;
 };
 
-export const Icon = ({ name }: IconProps) => <IconElem>{name}</IconElem>;
+export const Icon = ({ name, className, onClick }: IconProps) => (
+  <IconElem
+    className={className || ""}
+    onClick={(e) => {
+      if (onClick) {
+        onClick(e);
+      }
+    }}
+  >
+    {name}
+  </IconElem>
+);
