@@ -1,7 +1,6 @@
-import { useState, useEffect, ReactElement } from "react";
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
-import { getPopularMovies } from "../model/movies/movies";
 import { MovieDetailsElem } from "../model/movies/types";
 import { getMovieDetails } from "../model/movies/movie";
 import { PosterSkeleton } from "../components/PosterSkeleton";

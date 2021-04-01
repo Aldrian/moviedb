@@ -1,11 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { lightTheme, darkTheme } from "./utils/themes";
 import Home from "./pages/Home";
