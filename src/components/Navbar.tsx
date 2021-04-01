@@ -11,7 +11,7 @@ const NavbarElem = styled.nav`
   background-color: ${(props) => props.theme.colors.header};
   color: ${(props) => props.theme.colors.text};
 
-  width: 100%;
+  padding: 0.5rem 1rem;
 
   transition: color 0.3s ease, background-color 0.3s ease;
 
