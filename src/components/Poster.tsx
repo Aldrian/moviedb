@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+
 import { MovieListElem } from "../model/movies/types";
 
 const Overlay = styled.span`
@@ -58,12 +59,17 @@ const PosterElem = styled.div`
 
 type PosterProps = {
   movie: MovieListElem;
+  onClick: Function;
 };
 
-export const Poster = ({ movie }: PosterProps) => (
-  <PosterElem>
+export const Poster = ({ movie, onClick }: PosterProps) => (
+  <PosterElem
+    onClick={(e) => {
+      onClick(e);
+    }}
+  >
     <Overlay />
-    <img src={movie.poster} alt="movie poster" />
+    {movie.poster && <img src={movie.poster} alt="movie poster" />}
     <h3>{movie.title}</h3>
   </PosterElem>
 );

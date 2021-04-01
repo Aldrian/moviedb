@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { useHistory, useLocation } from "react-router-dom";
+
 import { Icon } from "./Icon";
 import { LightDarkToggleSwitch } from "./LightDarkToggleSwitch";
 
@@ -18,22 +20,38 @@ const NavbarElem = styled.nav`
   h1 {
     margin: 0;
   }
+
+  .back-icon {
+    cursor: pointer;
+  }
 `;
 
 type NavbarProps = {
-  isMovie: boolean;
   isDarkTheme: boolean;
   setIsDarkTheme: Function;
 };
 
-export const Navbar = ({
-  isMovie,
-  isDarkTheme,
-  setIsDarkTheme,
-}: NavbarProps) => (
-  <NavbarElem>
-    {isMovie ? <Icon name="keyboard_arrow_left" /> : <span />}
-    <h1>Movies</h1>
-    <LightDarkToggleSwitch checked={isDarkTheme} setChecked={setIsDarkTheme} />
-  </NavbarElem>
-);
+export const Navbar = ({ isDarkTheme, setIsDarkTheme }: NavbarProps) => {
+  const history = useHistory();
+  const location = useLocation();
+  return (
+    <NavbarElem>
+      {location.pathname.includes("/movie") ? (
+        <Icon
+          className="back-icon"
+          name="keyboard_arrow_left"
+          onClick={() => {
+            history.push("/");
+          }}
+        />
+      ) : (
+        <span />
+      )}
+      <h1>Movies</h1>
+      <LightDarkToggleSwitch
+        checked={isDarkTheme}
+        setChecked={setIsDarkTheme}
+      />
+    </NavbarElem>
+  );
+};

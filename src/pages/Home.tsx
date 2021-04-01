@@ -1,5 +1,7 @@
 import { useState, useEffect, ReactElement } from "react";
 import styled from "@emotion/styled";
+import { useHistory } from "react-router-dom";
+
 import { getPopularMovies, searchMovies } from "../model/movies/movies";
 import { MovieListElem } from "../model/movies/types";
 import { Poster } from "../components/Poster";
@@ -25,6 +27,7 @@ const duplicate = (x: ReactElement, n: number) =>
   Array.from(new Array(n), () => x);
 
 const Home = () => {
+  const history = useHistory();
   const [movies, setMovies] = useState<MovieListElem[]>([]);
   const [loading, setLoading] = useState(true);
   const skeletonElems = duplicate(<PosterSkeleton />, 8);
@@ -65,7 +68,13 @@ const Home = () => {
         {loading
           ? skeletonElems.map((elem) => elem)
           : movies.map((movie) => (
-              <Poster movie={movie} key={`movie${movie.id}`} />
+              <Poster
+                movie={movie}
+                key={`movie${movie.id}`}
+                onClick={() => {
+                  history.push(`/movie/${movie.id}`);
+                }}
+              />
             ))}
       </PosterList>
     </Wrapper>

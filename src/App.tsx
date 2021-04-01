@@ -1,11 +1,17 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { lightTheme, darkTheme } from "./utils/themes";
 import Home from "./pages/Home";
 import { Navbar } from "./components/Navbar";
 import { Container } from "./components/Container";
+import Movie from "./pages/Movie";
 
 const Wrapper = styled.div`
   height: auto;
@@ -27,20 +33,17 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
-        <Navbar
-          isMovie={false}
-          isDarkTheme={isDarkTheme}
-          setIsDarkTheme={setIsDarkTheme}
-        />
-        <Container>
-          <Router>
+        <Router>
+          <Navbar isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
+          <Container>
             <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
+              <Route path="/movie/:id" children={<Movie />} />
             </Switch>
-          </Router>
-        </Container>
+          </Container>
+        </Router>
       </Wrapper>
     </ThemeProvider>
   );
