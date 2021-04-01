@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { getPopularMovies } from "../model/movies/movies";
+import { getPopularMovies, searchMovies } from "../model/movies/movies";
 import { Movie } from "../model/movies/types";
 import { Poster } from "../components/Poster";
 import { SearchBar } from "../components/SearchBar";
@@ -21,23 +21,30 @@ const PosterList = styled.div`
 `;
 
 const Home = () => {
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
     getPopularMovies()
-      .then((movies) => setPopularMovies(movies))
-      .catch((_) => setPopularMovies([]));
+      .then((elems) => setMovies(elems))
+      .catch((_) => setMovies([]));
   }, []);
 
   return (
     <Wrapper>
       <SearchBar
         onActionCalled={(searchValue: string) => {
-          console.log(searchValue);
+          searchMovies(searchValue)
+            .then((elems) => setMovies(elems))
+            .catch((_) => setMovies([]));
+        }}
+        onCleared={() => {
+          getPopularMovies()
+            .then((elems) => setMovies(elems))
+            .catch((_) => setMovies([]));
         }}
       />
       <PosterList>
-        {popularMovies.map((movie) => (
+        {movies.map((movie) => (
           <Poster movie={movie} key={`movie${movie.id}`} />
         ))}
       </PosterList>

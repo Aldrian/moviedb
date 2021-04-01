@@ -38,7 +38,7 @@ const SearchBarElem = styled.div`
     position: absolute;
     left: 15px;
     top: 15px;
-    z-index: 999;
+    cursor: pointer;
     color: ${(props) => props.theme.colors.header};
 
     transition: color 0.3s ease;
@@ -57,9 +57,10 @@ const SearchBarElem = styled.div`
 
 type SearchBarProps = {
   onActionCalled: Function;
+  onCleared: Function;
 };
 
-export const SearchBar = ({ onActionCalled }: SearchBarProps) => {
+export const SearchBar = ({ onActionCalled, onCleared }: SearchBarProps) => {
   const [searchContent, setSearchContent] = useState("");
 
   const handleSearch = () => {
@@ -81,7 +82,12 @@ export const SearchBar = ({ onActionCalled }: SearchBarProps) => {
         type="text"
         placeholder="Rechercher un film"
         value={searchContent}
-        onChange={(e) => setSearchContent(e.target.value)}
+        onChange={(e) => {
+          if (e.target.value === "") {
+            onCleared();
+          }
+          setSearchContent(e.target.value);
+        }}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
             handleSearch();
@@ -96,6 +102,7 @@ export const SearchBar = ({ onActionCalled }: SearchBarProps) => {
           className="closeIcon"
           name="close"
           onClick={() => {
+            onCleared();
             setSearchContent("");
           }}
         />

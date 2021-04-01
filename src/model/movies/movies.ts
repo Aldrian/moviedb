@@ -26,3 +26,29 @@ export const getPopularMovies = async (): Promise<Movie[]> => {
     return [];
   }
 };
+
+export const searchMovies = async (query: string): Promise<Movie[]> => {
+  try {
+    const response = await fetch(
+      `${movieApiBaseUrl}/search/movie?api_key=${
+        process.env.REACT_APP_MOVIEDB_API_KEY
+      }&query=${encodeURI(query)}`
+    );
+    const data = await response.json();
+    if (data.results) {
+      return data.results.map((movie: any) => {
+        const { id, title, poster_path } = movie;
+
+        return {
+          id,
+          title,
+          poster: poster_path ? `${posterBaseUrl}${poster_path}` : undefined,
+        };
+      });
+    }
+    return [];
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};

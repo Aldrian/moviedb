@@ -10,3 +10,9 @@ body, html {
   margin:  0px auto;
   padding: 0px auto;
 }
+
+#root {
+  height:  100%;
+  margin:  0px auto;
+  padding: 0px auto;
+}
