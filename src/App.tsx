@@ -1,39 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-import styled from "@emotion/styled";
 import { lightTheme, darkTheme } from "./utils/themes";
-import { getPopularMovies } from "./model/movies/movies";
-import { Movie } from "./model/movies/types";
-
-const Button = styled.button`
-  color: ${(props) => props.theme.colors.text};
-  background: ${(props) => props.theme.colors.background};
-  padding: 5px 10px;
-`;
+import Home from "./pages/home";
 
 const App = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(
     window.matchMedia("(prefers-color-scheme: dark)").matches
   );
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
 
   const theme = isDarkTheme ? darkTheme : lightTheme;
 
-  useEffect(() => {
-    getPopularMovies()
-      .then((movies) => setPopularMovies(movies))
-      .catch((_) => setPopularMovies([]));
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
-      <Button
-        onClick={() => {
-          setIsDarkTheme(!isDarkTheme);
-        }}
-      >
-        Test
-      </Button>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
     </ThemeProvider>
   );
 };
