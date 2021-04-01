@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   transition: color 0.3s ease, background-color 0.3s ease;
 
   span {
-    font-size: 16px;
+    font-size: 1rem;
   }
 `;
 //https://codepen.io/danny_pule/pen/vNbqxx

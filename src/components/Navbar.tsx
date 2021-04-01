@@ -8,8 +8,6 @@ const NavbarElem = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  padding: 5px 20px;
-
   background-color: ${(props) => props.theme.colors.header};
   color: ${(props) => props.theme.colors.text};
 

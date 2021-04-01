@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { getPopularMovies } from "../model/movies/movies";
 import { Movie } from "../model/movies/types";
+import { Poster } from "../components/Poster";
 
-const Button = styled.button`
-  color: ${(props) => props.theme.colors.text};
-  background: ${(props) => props.theme.colors.background};
-  padding: 5px 10px;
+const Wrapper = styled.div``;
+
+const PosterList = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  margin-top: 2rem;
 `;
 
 const Home = () => {
@@ -18,7 +24,15 @@ const Home = () => {
       .catch((_) => setPopularMovies([]));
   }, []);
 
-  return <Button>Test</Button>;
+  return (
+    <Wrapper>
+      <PosterList>
+        {popularMovies.map((movie) => (
+          <Poster movie={movie} key={`movie${movie.id}`} />
+        ))}
+      </PosterList>
+    </Wrapper>
+  );
 };
 
 export default Home;
